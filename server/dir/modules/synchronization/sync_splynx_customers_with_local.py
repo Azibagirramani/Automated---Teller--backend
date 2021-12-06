@@ -3,7 +3,6 @@ from ...modules.customers.helpers.helperCustomers import HelperCustomer
 from ...modules.splynx.helpers.helperSplynx import HelperSplynx
 from fastapi import BackgroundTasks
 import threading
-import logging
 
 class SyncSplynxCustomersWithLocal(BaseOperations, HelperCustomer, HelperSplynx):
     """
@@ -57,11 +56,20 @@ class SyncSplynxCustomersWithLocal(BaseOperations, HelperCustomer, HelperSplynx)
         'name': data['name'],
         'gps': data['gps'],
         "street_1": data['street_1'],
+        'billing_type': data['billing_type'],
+        'date_add': data['date_add'],
+        'last_online': data['last_online'],
+        'last_update': data['last_update'],
 
     } 
 
     # dump data to local database
     def dump_to_local(self, data: list = []) -> None:
+
+        yield {
+            "event": "start-local-sync",
+            "message": "Local Customer Synchronization started"
+        }
         # customers to update   
         customers_to_update = []
 
@@ -96,6 +104,10 @@ class SyncSplynxCustomersWithLocal(BaseOperations, HelperCustomer, HelperSplynx)
                 "splynx": data['splynx'],
                 "gps": data['gps'],
                 "street_1": data['street_1'],
+                'billing_type': data['billing_type'],
+                'date_add': data['date_add'],
+                'last_online': data['last_online'],
+                'last_update': data['last_update'],
             }
 
             # check if customer exists by splynx id

@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\Kelvin\Documents\new-dotmac-backend\dotmac-backend\env"
+VIRTUAL_ENV="C:\Users\mkelv\Documents\dotmack\env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

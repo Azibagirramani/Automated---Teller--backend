@@ -9,7 +9,7 @@ class Database:
     def insert(self, data):
         self.collection.insert_one(data)
     
-    def find(self, data):
+    def find(self, data = {}):
         return self.collection.find(data)
 
     def find_one(self, data):

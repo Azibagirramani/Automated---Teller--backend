@@ -5,10 +5,18 @@ class HelperCustomer:
 
     Database = Database("customers")
     def __init__(self) -> None:
-        pass
+        pass 
+
+
+    def getCustomers(self, data = {}) -> list or Exception:
+        try:
+            return self.Database.find(data)
+        except Exception as e:
+            print(e)
+            return None
 
     # add to databse
-    def addCustomer(self, data):
+    def addCustomer(self, data) -> bool or Exception:
         try:
             return self.Database.insert(data)
         except Exception as e:
