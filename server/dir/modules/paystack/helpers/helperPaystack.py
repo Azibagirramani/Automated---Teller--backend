@@ -4,7 +4,6 @@ class HelperPaystack:
 
 
     baseUrl = "https://api.paystack.co/" 
-    secret = "sk_live_e7c60e218242dd1f06d54682da5b23a80d604e05"
     test_secret = "sk_test_20f5df27dd1b3f2ef630d361c637de355062df30"
     def __init__(self):
         pass
