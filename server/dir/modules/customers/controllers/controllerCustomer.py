@@ -1,9 +1,7 @@
 from ..helpers.helperCustomers import HelperCustomer
 from datetime import datetime
-class ControllerCustomer(HelperCustomer):
 
-    def __init__(self):
-        super().__init__()
+class ControllerCustomer(HelperCustomer):
 
 
     # customer serializer
@@ -65,7 +63,8 @@ class ControllerCustomer(HelperCustomer):
     
         return customers
 
-        # get current year, data, month
 
-        # if data[0] > dateTime:
-        #     print("dateTime: {}".format(dateTime))
+    def customerSummary(self):
+        content = {}
+        content['customers'] = len(super().getCustomers())
+        return content

@@ -9,8 +9,12 @@ class HelperCustomer:
 
 
     def getCustomers(self, data = {}) -> list or Exception:
+        customers = []
         try:
-            return self.Database.find(data)
+            for x in self.Database.find(data):
+                customers.append(x)
+            return customers
+
         except Exception as e:
             print(e)
             return None

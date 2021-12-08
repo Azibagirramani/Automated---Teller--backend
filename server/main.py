@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from dir.endpoints import splynx, synchronizaton as operations, stats, customers as customerEndpoints
+from dir.endpoints import splynx, synchronizaton as operations, stats, customers as customerEndpoints, flutterwave, paystack
 
 server = FastAPI()
 
@@ -21,7 +21,8 @@ server.add_middleware(
 
 
 server.include_router(splynx.endpoints, tags=["splynx"])
-
+server.include_router(paystack.endpoints, tags=["paystack"], prefix="/paystack")
 server.include_router(operations.endpoints,  tags=["Operations"], prefix="/operations")
 server.include_router(stats.endpoints,  tags=["Stats"])
 server.include_router(customerEndpoints.endpoints,  tags=["Customers"] )
+server.include_router(flutterwave.endpoints,  tags=["Flutterwave"], prefix="/flutterwave")

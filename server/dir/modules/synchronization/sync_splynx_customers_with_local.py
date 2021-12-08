@@ -64,12 +64,7 @@ class SyncSplynxCustomersWithLocal(BaseOperations, HelperCustomer, HelperSplynx)
     } 
 
     # dump data to local database
-    def dump_to_local(self, data: list = []) -> None:
-
-        yield {
-            "event": "start-local-sync",
-            "message": "Local Customer Synchronization started"
-        }
+    def dump_to_local(self, data: list = []):
         # customers to update   
         customers_to_update = []
 
@@ -123,21 +118,18 @@ class SyncSplynxCustomersWithLocal(BaseOperations, HelperCustomer, HelperSplynx)
                 # insert customer
                 HelperCustomer().addCustomer(customer_dict)
                 customers_to_insert.append(customer_dict)
-        
-    # return data summary for sync
-            
 
     
-    def sync(self) -> None:
+    def sync(self):
+
+        customer = HelperSplynx().get_splynx_customers()
+        self.dump_to_local(customer)
+
         # create thread to sync
-        sync_thread = threading.Thread(target=self.dump_to_local, args=(HelperSplynx().get_splynx_customers(), ))
-        sync_thread.name = "sync_splynx_customers_with_local"
-        self.Background_tasks.add_task(sync_thread.start())
+        # sync_thread = threading.Thread(target=, args=(customer, ))
+        # sync_thread.name = "sync_splynx_customers_with_local"
+        # self.Background_tasks.add_task(sync_thread.start())
+        # sync_thread.start()
+        return "Finished"
 
-        return "Synchronization started"
 
-
-class SyncLocalCustomersWithPayStack(HelperCustomer):
-    pass
-
-SplynxCustomersWithLocal = SyncSplynxCustomersWithLocal()

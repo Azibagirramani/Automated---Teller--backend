@@ -4,10 +4,13 @@ from typing import Optional
 endpoints = APIRouter()
 
 
+@endpoints.get("/customer-summary")
+async def get_customer_summary():
+    return ControllerCustomer().customerSummary()
+
 @endpoints.get("/customers")
 async def get_customers():
     return ControllerCustomer().controllerGetCustomers()
-    # return {"customers": "customers"}
 
 
 @endpoints.get("/customers/filter")

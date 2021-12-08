@@ -14,6 +14,7 @@ class Splynx(HelperSplynx):
         return self.get_splynx_customers()
 
 
-
+    def get_transactions(self) -> dict:
+        return self.get_splynx_transactions()
 
 Splynx = Splynx()

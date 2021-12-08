@@ -35,7 +35,7 @@ class HelperSplynx:
     def get_splynx_customers(self) -> list:
         url = "customers/customer"
         response = self.request_get(url)
-        return response.json()[:20]
+        return response.json()
 
     # get all splynx customer
 
@@ -44,4 +44,7 @@ class HelperSplynx:
         response = self.request_get(url)
         return response.json()
 
-
+    def get_splynx_transactions(self) -> list:
+        url = "finance/transactions"
+        response = self.request_get(url)
+        return response.json()

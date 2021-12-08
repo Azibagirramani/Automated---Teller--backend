@@ -3,33 +3,39 @@ import requests
 class HelperPaystack:
 
 
-    baseUrl = "https://api.paystack.co"
-    secret = "sk_test_20f5df27dd1b3f2ef630d361c637de355062df30"
-
+    baseUrl = "https://api.paystack.co/" 
+    secret = "sk_live_e7c60e218242dd1f06d54682da5b23a80d604e05"
+    test_secret = "sk_test_20f5df27dd1b3f2ef630d361c637de355062df30"
     def __init__(self):
         pass
 
 
     def get_header(self):
         return {
-            "Authorization": "Bearer " + self.get_paystack_secret(self._secret),
+            "Authorization": "Bearer " + self.get_paystack_secret(),
             "Content-Type": "application/json"
         }    
     
     def get_paystack_customers(self, url):
         pass
 
-    def get_paystack_secret(self, secret) -> str:
-        return self._secret
+    def get_paystack_secret(self) -> str:
+        return self.secret
 
-    def get_paystack_url(self, url):
-        return self._baseUrl
+    def get_paystack_url(self):
+        return self.baseUrl
 
         
-    def get_request(self) -> None or list:
-        return requests.get(self.get_paystack_url(self._url), headers=self.get_header())
+    def get_request(self, url) -> None or list:
+        return requests.get("{}{}".format(self.baseUrl, url), headers=self.get_header())
     
 
-    def get_paystack_api_key(self, api_key):
-        pass
+    def get_transactions_helper(self):
+        url = "transfer?page=1&perPage=10000000"
+        response = self.get_request(url)
+        return response.json()
 
+    def get_settlements_helper(self):
+        url = "settlement"
+        response = self.get_request(url)
+        return response.json()
